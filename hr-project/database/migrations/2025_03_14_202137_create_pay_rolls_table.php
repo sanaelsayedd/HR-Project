@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('pay_rolls', function (Blueprint $table) {
             $table->id();
+            $table->float('Amount');
+            $table->float('Deduction');
+            $table->float('Bonus');
+            $table->dateTime('date');
+            $table->foreignId('employee_id')->constrained('employees','id')->restrictOnDelete();
             $table->timestamps();
         });
     }

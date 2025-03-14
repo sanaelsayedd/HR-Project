@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
+            $table->dateTime('StartDate');
+            $table->dateTime('EndDate');
+            $table->boolen('Status');
+            $table->foreignId('Permission_Balance_id')->constrained('permission_balances','id')->restrictOnDelete();
+            $table->foreignId('Permission_Type_id')->constrained('permission_types','id')->restrictOnDelete();
             $table->timestamps();
         });
     }

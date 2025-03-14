@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('job_positions', function (Blueprint $table) {
             $table->id();
+            $table->string('Job_Title');
+            $table->string('Job_Description');
+            $table->foreignId('department_id')->constrained('departments','id')->restrictOnDelete();
             $table->timestamps();
         });
     }

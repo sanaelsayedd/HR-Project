@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('permission_balances', function (Blueprint $table) {
             $table->id();
+            $table->integer('Balance_Amount');
+            $table->foreignId('employee_id')->constrained('employees','id')->restrictOnDelete();
             $table->timestamps();
         });
     }

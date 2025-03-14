@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('vecation_balances', function (Blueprint $table) {
-            $table->id();
+                $table->id();
+                $table->float('Total_balance');
+                $table->dateTime('Total_Days');
+                $table->integer('Remaining_Days');
+                $table->foreignId('emloyee_id')->constrained('emloyees','id')->restrictOnDelete();
+                $table->foreignId('vecation_type_id')->constrained('vecation_types','id')->restrictOnDelete();
             $table->timestamps();
         });
     }

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('permission_types', function (Blueprint $table) {
             $table->id();
+            $table->string('TypeName');
+            $table->string('Description');
+            $table->boolen('Status');
             $table->timestamps();
         });
     }
