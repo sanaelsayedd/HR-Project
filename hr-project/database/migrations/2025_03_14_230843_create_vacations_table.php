@@ -11,10 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permission_balances', function (Blueprint $table) {
+        Schema::create('vecations', function (Blueprint $table) {
             $table->id();
-            $table->integer('Balance_Amount');
             $table->foreignId('employee_id')->constrained('employees','id')->restrictOnDelete();
+            $table->foreignId('VacationTypeID')->constrained('vecation_types','id')->restrictOnDelete();
+            $table->dateTime('Start_Date');
+            $table->dateTime('End_Date');
+            $table->string('Duration');
+            $table->dateTime('RequestDate');
+            $table->dateTime('ApprovalDate');
+            $table->string('Status');
+            $table->string('Comments');
             $table->timestamps();
         });
     }
@@ -24,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permission_balances');
+        Schema::dropIfExists('vecations');
     }
 };
