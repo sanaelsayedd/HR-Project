@@ -18,6 +18,7 @@ return new class extends Migration
     $table->foreignId('job_position_id')->constrained('job_positions','id')->restrictOnDelete();
     $table->foreignId('Manager_id')->constrained('employees','id')->restrictOnDelete();
     $table->timestamps();
+      
         });}
 
 
