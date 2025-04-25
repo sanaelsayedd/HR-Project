@@ -32,19 +32,33 @@ class User_Controller extends Controller
         ]);
     }
 
-    public function show_Vacation(VacationBalance $vacation,)
+    public function show_Vacation(VacationBalance $vacation)
     {
-        return view('dashboard',['vacation'=> $vacation] );
+        $vacationBalance = VacationBalance::where('employee_id', Auth::id())->first();
+        $permissionBalance = PermissionBalance::where('employee_id', Auth::id())->first();
+
+        return view('dashboard', [
+            'vacation' => $vacation,
+            'Total_balance' => $vacationBalance ? $vacationBalance->Total_balance : 'N/A',
+            'Balance_Amount' => $permissionBalance ? $permissionBalance->Balance_Amount : 'N/A'
+        ]);
     }
 
-    public function show_Permission( PermissionBalance $Permission,)
+    public function show_Permission(PermissionBalance $Permission)
     {
-        return view('dashboard',['Permission'=> $Permission] );
+        $vacationBalance = VacationBalance::where('employee_id', Auth::id())->first();
+        $permissionBalance = PermissionBalance::where('employee_id', Auth::id())->first();
+
+        return view('dashboard', [
+            'Permission' => $Permission,
+            'Total_balance' => $vacationBalance ? $vacationBalance->Total_balance : 'N/A',
+            'Balance_Amount' => $permissionBalance ? $permissionBalance->Balance_Amount : 'N/A'
+        ]);
     }
 
     public function vacation()
     {
-        return view("dashboard");
+        return view("Users.vacation");
     }
 
     public function store_Vacation(Request $request)
