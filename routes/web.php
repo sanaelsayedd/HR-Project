@@ -1,36 +1,30 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User_Controller;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/index',  [User_Controller::class,'index'])->name('Users.index');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Vacation routes
-Route::get('/vacation', [User_Controller::class, 'vacation'])->name('Users.vacation');
-Route::post('/store-vacation', [User_Controller::class, 'store_Vacation'])->name('store.vacation');
+Route::middleware('auth')->group(function () {
+    // Profile Routes
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-// Permission routes
-Route::get('/permission', [User_Controller::class, 'permission'])->name('Users.permission');
-Route::post('/store-permission', [User_Controller::class, 'store_Permission'])->name('store.permission');
+    // Vacation Routes
+    Route::get('/vacation', [User_Controller::class, 'vacation'])->name('Users.vacation');
+    Route::post('/store-vacation', [User_Controller::class, 'store_Vacation'])->name('store.vacation');
 
-Route::get('/profile',  [User_Controller::class,'profile'])->name('Users.profile');
+    // Permission Routes
+    Route::get('/permission', [User_Controller::class, 'permission'])->name('Users.permission');
+    Route::post('/store-permission', [User_Controller::class, 'store_Permission'])->name('store.permission');
+});
 
-// Authentication routes
-Route::get('/login', [User_Controller::class, 'login'])->name('login');
-Route::post('/login', [User_Controller::class, 'doLogin'])->name('do.login');
-Route::post('/register', [User_Controller::class, 'doRegister'])->name('do.register');
-
+require __DIR__.'/auth.php';

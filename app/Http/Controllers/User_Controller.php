@@ -169,4 +169,3 @@ class User_Controller extends Controller
         return redirect('/');
     }
 }
-
