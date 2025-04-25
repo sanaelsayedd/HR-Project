@@ -26,7 +26,7 @@ class User_Controller extends Controller
         $vacationBalance = VacationBalance::where('employee_id', Auth::id())->first();
         $permissionBalance = PermissionBalance::where('employee_id', Auth::id())->first();
 
-        return view("Users.index", [
+        return view("Users.dashboard", [
             'Total_balance' => $vacationBalance ? $vacationBalance->Total_balance : 'N/A',
             'Balance_Amount' => $permissionBalance ? $permissionBalance->Balance_Amount : 'N/A'
         ]);
@@ -34,12 +34,12 @@ class User_Controller extends Controller
 
     public function show_Vacation(VacationBalance $vacation,)
     {
-        return view('Users.index',['vacation'=> $vacation] );
+        return view('Users.dashboard',['vacation'=> $vacation] );
     }
 
     public function show_Permission( PermissionBalance $Permission,)
     {
-        return view('Users.index',['Permission'=> $Permission] );
+        return view('Users.dashboard',['Permission'=> $Permission] );
     }
 
     public function vacation()

@@ -20,6 +20,10 @@ public function department()
 {
     return $this->belongsTo(Department::class);
 }
+public function users()
+{
+    return $this->hasMany(User::class);
+}
 
 
 }

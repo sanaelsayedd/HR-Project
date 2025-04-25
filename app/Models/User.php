@@ -35,6 +35,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail, Has
         'firstname',
         'lastname',
         'password',
+        'JobPosition_id',
     ];
 
     /**
@@ -115,8 +116,13 @@ public function permissionBalances()
 {
     return $this->hasMany(PermissionBalance::class, 'employee_id');
 }
+public function department()
+{
+    return $this->belongsTo(Department::class);
+}
 
-
-
-
+public function jobPosition()
+{
+    return $this->belongsTo(JobPosition::class);
+}
 }

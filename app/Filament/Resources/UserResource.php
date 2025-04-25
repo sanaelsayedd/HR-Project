@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
+use App\Models\jobPosition;
 use App\Models\User;
 use App\Settings\MailSettings;
 use Exception;
@@ -17,6 +18,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
@@ -90,6 +92,7 @@ class UserResource extends Resource
                             ])
                             ->compact()
                             ->hidden(fn(string $operation): bool => $operation === 'create'),
+                            
                     ])
                     ->columnSpan(1),
 
@@ -108,6 +111,7 @@ class UserResource extends Resource
                                             ? ['unique:users,username,' . $userId]
                                             : ['unique:users,username'];
                                     }),
+                                    Select::make(name: 'jobPosition_id')->options(options: jobPosition::pluck('Job_Title','id'))->required(),
 
                                 Forms\Components\TextInput::make('email')
                                     ->email()
@@ -143,11 +147,12 @@ class UserResource extends Resource
                                     ->optionsLimit(5)
                                     ->columnSpanFull(),
                             ])
-                    ])
+                            ])
                     ->columnSpan([
                         'sm' => 1,
                         'lg' => 2
                     ]),
+
             ])
             ->columns(3);
     }
@@ -162,6 +167,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('username')->label('Username')
                     ->description(fn(Model $record) => $record->firstname . ' ' . $record->lastname)
                     ->searchable(),
+                TextColumn::make('jobPosition.Job_Title')->label('jobPosition'),
                 Tables\Columns\TextColumn::make('roles.name')->label('Role')
                     ->formatStateUsing(fn($state): string => Str::headline($state))
                     ->colors(['info'])
