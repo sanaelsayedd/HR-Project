@@ -26,7 +26,7 @@ class User_Controller extends Controller
         $vacationBalance = VacationBalance::where('employee_id', Auth::id())->first();
         $permissionBalance = PermissionBalance::where('employee_id', Auth::id())->first();
 
-        return view("Users.dashboard", [
+        return view("dashboard", [
             'Total_balance' => $vacationBalance ? $vacationBalance->Total_balance : 'N/A',
             'Balance_Amount' => $permissionBalance ? $permissionBalance->Balance_Amount : 'N/A'
         ]);
@@ -34,17 +34,17 @@ class User_Controller extends Controller
 
     public function show_Vacation(VacationBalance $vacation,)
     {
-        return view('Users.dashboard',['vacation'=> $vacation] );
+        return view('dashboard',['vacation'=> $vacation] );
     }
 
     public function show_Permission( PermissionBalance $Permission,)
     {
-        return view('Users.dashboard',['Permission'=> $Permission] );
+        return view('dashboard',['Permission'=> $Permission] );
     }
 
     public function vacation()
     {
-        return view("Users.vacation");
+        return view("dashboard");
     }
 
     public function store_Vacation(Request $request)
@@ -87,7 +87,7 @@ class User_Controller extends Controller
                 'Status' => 'Pending'
             ]);
 
-            return redirect()->route('Users.index')->with('success', 'Vacation request submitted successfully');
+            return redirect()->route('dashboard')->with('success', 'Vacation request submitted successfully');
 
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Failed to save vacation request']);
@@ -118,7 +118,7 @@ class User_Controller extends Controller
                 'Status' => 'Pending'
             ]);
 
-            return redirect()->route('Users.index')->with('success', 'Permission request submitted successfully');
+            return redirect()->route('dashboard')->with('success', 'Permission request submitted successfully');
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Failed to save permission request']);
         }
