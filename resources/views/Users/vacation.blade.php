@@ -3,10 +3,11 @@
 @section('title')Vacation Request @endsection
 
 @section('content')
+@section('header')
+    <h2>Vacation Request</h2>
+@endsection
 
 <div class="container">
-    <h1 class="mb-4">Vacation Request</h1>
-
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}

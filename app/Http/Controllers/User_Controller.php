@@ -138,48 +138,5 @@ class User_Controller extends Controller
         }
     }
 
-    public function profile()
-    {
-        return view("Users.profile");
-    }
-
-    public function login(Request $request) {
-        return view('users.login');
-    }
-
-    public function doLogin(Request $request) {
-      //   if(!Auth::attempt(['email' => $request->email, 'password' => $request->password]))
-      //       return redirect()->back()->withInput($request->input())->withErrors('Invalid login information.');
-
-        $user = User::where('email', $request->email)->first();
-        Auth::setUser($user);
-
-        $user = User::where('email', $request->email)->first();
-        if(!$user->email_verified_at)
-         return redirect()->back()->withInput($request->input())
-        ->withErrors('Your email is not verified.');
-
-        return redirect('/');
-    }
-
-    public function doRegister(Request $request) {
-        try {
-            $this->validate($request, [
-                'name' => ['required', 'string', 'min:5'],
-                'email' => ['required', 'email', 'unique:users'],
-                'password' => ['required', 'confirmed', Password::min(8)->numbers()->letters()->mixedCase()->symbols()],
-            ]);
-        }
-        catch(\Exception $e) {
-            return redirect()->back()->withInput($request->input())->withErrors('Invalid registration information.');
-        }
-
-        $user =  new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password); //Secure
-        $user->save();
-
-        return redirect('/');
-    }
+    
 }
