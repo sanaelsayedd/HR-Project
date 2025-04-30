@@ -21,8 +21,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/store-vacation', [User_Controller::class, 'store_Vacation'])->name('store.vacation');
 
     // Permission Routes
+// Show the permission form
+    Route::post('/permission/store', [User_Controller::class, 'store_Permission'])->name('Users.permission.store');
+
     Route::get('/permission', [User_Controller::class, 'permission'])->name('Users.permission');
-    Route::post('/store-permission', [User_Controller::class, 'store_Permission'])->name('store.permission');
+
+    // Handle form submission
+
 });
 
 require __DIR__.'/auth.php';

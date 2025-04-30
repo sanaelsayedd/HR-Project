@@ -10,23 +10,23 @@
                     </a>
                 </div>
                 
-                <!-- Nav-->
-                <div class="pt-2 pb-3 space-y-1">
-                    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-responsive-nav-link>
-                
-                    <x-responsive-nav-link :href="route('Users.vacation')" :active="request()->routeIs('Users.vacation')">
-                        {{ __('Vacation') }}
-                    </x-responsive-nav-link>
-                
-                    <x-responsive-nav-link :href="route('Users.permission')" :active="request()->routeIs('Users.permission')">
-                        {{ __('Permissions') }}
-                    </x-responsive-nav-link>
-                
-                    <span class="block px-4 py-2 text-sm text-gray-400">Disabled</span>
-                </div>
-                
+<!-- Nav-->
+<div class="pt-2 pb-3 flex items-center space-x-4">
+    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+        {{ __('Dashboard') }}
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link :href="route('Users.vacation')" :active="request()->routeIs('Users.vacation')">
+        {{ __('Vacation') }}
+    </x-responsive-nav-link>
+
+    <x-responsive-nav-link :href="route('Users.permission')" :active="request()->routeIs('Users.permission')">
+        {{ __('Permissions') }}
+    </x-responsive-nav-link>
+
+    <span class="text-sm text-gray-400">Disabled</span>
+</div>
+
 
 
             <!-- Settings Dropdown -->

@@ -15,11 +15,7 @@ use Illuminate\Validation\Rules\Password;
 
 class User_Controller extends Controller
 {
-   //  public function __construct()
-   //  {
-   //      // Apply auth middleware to all methods except login and register
-   //      $this->middleware('auth')->except(['login', 'doLogin', 'doRegister']);
-   //  }
+
    
     public function index()
     {
